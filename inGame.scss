@@ -1,0 +1,22 @@
+html {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  font-family: Poppins;
+}
+
+body {
+  background-color: #A0A0A0;
+}
+
+header{
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 10vh;
+  background-color: #313131;
+  text-align: center;
+  h1{
+    font-weight: bold;
+  }
+}
