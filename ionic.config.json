@@ -1,0 +1,7 @@
+{
+  "name": "wecount",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
