@@ -13,7 +13,8 @@ const routes: Routes = [
   {
     path: 'start',
     loadChildren: () => import('./start/start.module').then( m => m.StartPageModule)
-  },  {
+  },
+  {
     path: 'match',
     loadChildren: () => import('./match/match.module').then( m => m.MatchPageModule)
   }
