@@ -54,13 +54,11 @@ export const getMatch = functions.https.onRequest(async (request, response) => {
     // Stuur dan de existingMatch naar de gebruiker
     response.send(existingMatch)
   }
-// bitchhhh
-  // dev diff
 });
 
 async function getDocument(collection: string, id: string | number) {
-  const refeference: DocumentReference<DocumentData> = (await db.collection(collection).doc(`${id}`));
-  const snapshot = refeference.get()
+  const reference: DocumentReference<DocumentData> = (await db.collection(collection).doc(`${id}`));
+  const snapshot = reference.get()
   return (await snapshot).data()
 }
 
