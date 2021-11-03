@@ -18,7 +18,6 @@ const db = admin.firestore();
 
 export const getMatch = functions.https.onRequest(async (request, response) => {
 
-
   // // Summoner info
   // const info: SummonerInfo = request.body as SummonerInfo;
   //

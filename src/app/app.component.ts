@@ -8,8 +8,5 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  constructor(private db: AngularFirestore) {
-    const matches = db.collection('matches').valueChanges();
-    matches.subscribe(console.log);
-  }
+  constructor() {}
 }
