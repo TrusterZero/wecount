@@ -1,9 +1,9 @@
-import { Champion } from "./Champion";
-import { CurrentGameParticipant } from "./CurrentGameParticipant";
-import { Serializable } from "./Serializable";
-import { Spell } from "./Spell";
+import {Champion} from "./Champion";
+import {CurrentGameParticipant} from "./CurrentGameParticipant";
+import {Serializable} from "./Serializable";
+import {Spell} from "./Spell";
 
-export class Participant implements Serializable{
+export class Participant implements Serializable {
   id: string;
   name: string;
   champion: Champion | undefined;
@@ -12,44 +12,44 @@ export class Participant implements Serializable{
 
   constructor(gameParticipant: CurrentGameParticipant) {
     if (gameParticipant.summonerId !== undefined) {
-      this.id = gameParticipant.summonerId
+      this.id = gameParticipant.summonerId;
     } else {
-      throw new Error("summonerId missing but required")
+      throw new Error("summonerId missing but required");
     }
 
-    if (gameParticipant.summonerName){
-      this.name = gameParticipant.summonerName
+    if (gameParticipant.summonerName) {
+      this.name = gameParticipant.summonerName;
     } else {
-      throw new Error("summonerName missing but required")
+      throw new Error("summonerName missing but required");
     }
 
     if (gameParticipant.championId) {
-      console.log("championId", gameParticipant.championId)
-      this.champion = new Champion(gameParticipant.championId.toString())
+      console.log("championId", gameParticipant.championId);
+      this.champion = new Champion(gameParticipant.championId.toString());
     }
 
     if (gameParticipant.spell1Id !== undefined) {
-      this.spells.push(new Spell(gameParticipant.spell1Id))
+      this.spells.push(new Spell(gameParticipant.spell1Id));
     }
 
     if (gameParticipant.spell2Id !== undefined) {
-      this.spells.push(new Spell(gameParticipant.spell2Id))
+      this.spells.push(new Spell(gameParticipant.spell2Id));
     }
 
-    if (gameParticipant.teamId !== undefined){
-      this.teamId = gameParticipant.teamId
+    if (gameParticipant.teamId !== undefined) {
+      this.teamId = gameParticipant.teamId;
     } else {
-      throw new Error("teamId missing but required")
+      throw new Error("teamId missing but required");
     }
   }
 
-  serialize(){
-    return{
+  serialize(): Record<string, unknown> {
+    return {
       id: this.id,
       name: this.name,
       champion: this.champion?.serialize(),
-      spells: this.spells.map(spell => spell.serialize()),
-      teamId: this.teamId
-    }
+      spells: this.spells.map((spell) => spell.serialize()),
+      teamId: this.teamId,
+    };
   }
 }

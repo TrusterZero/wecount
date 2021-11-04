@@ -1,23 +1,21 @@
 import * as functions from "firebase-functions";
 import admin from "firebase-admin";
-// @ts-ignore
-import firebase from "firebase"
+import firebase from "firebase";
 // import axios from "axios";
 import {CurrentGameInfo} from "./models/CurrentGameInfo";
 import {Match} from "./models/Match";
 // import {SummonerInfo} from "./models/SummonerInfo";
 // import {SummonerDTO} from "./models/SummonerDTO";
-import {firestore} from 'firebase-admin/lib/firestore';
+import {firestore} from "firebase-admin/lib/firestore";
 import DocumentReference = firestore.DocumentReference;
 import DocumentData = firebase.firestore.DocumentData;
 
 
-admin.initializeApp()
+admin.initializeApp();
 // Firebase SDK
 const db = admin.firestore();
 
 export const getMatch = functions.https.onRequest(async (request, response) => {
-
   // // Summoner info
   // const info: SummonerInfo = request.body as SummonerInfo;
   //
@@ -29,36 +27,34 @@ export const getMatch = functions.https.onRequest(async (request, response) => {
   // const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-5eb77cab-2854-445b-aa6a-f4f235ca21ca`;
   // const gameInfo: CurrentGameInfo = (await axios.get(matchUrl)).data;
 
-  // @ts-ignore
-  const gameInfo: CurrentGameInfo = MATCH_DATA as CurrentGameInfo;
+  const gameInfo: CurrentGameInfo = MATCH_DATA as unknown as CurrentGameInfo;
 
-  const runningMatch: Match = new Match(gameInfo) // De match die wij van riot binnen krijgen
+  const runningMatch: Match = new Match(gameInfo); // De match die wij van riot binnen krijgen
 
 
   // const existingMatchRef: DocumentReference<DocumentData> = (await db.collection('matches').doc(`${runningMatch.id}`));
   // const existingMatchSnapshot = existingMatchRef.get()
   // const existingMatch: Match = (await existingMatchSnapshot).data(); // De match die wij zelf op hebben geslagen (met de al gebruikte spells (usedSpells))
 
-  const existingMatch: Match = await getDocument('matches', runningMatch.id) // de eerdere 3 stappen worden uitgevoerd in deze functie
+  const existingMatch: Match | undefined = (await getDocument<Match>("matches", runningMatch.id)); // de eerdere 3 stappen worden uitgevoerd in deze functie
 
   // Als we geen existing match hebben
   if (!existingMatch) {
     // Plaats dan de runningMatch die we van Riot hebben gekregen in de data base
-    await db.collection('matches').doc(`${runningMatch.id}`).set(runningMatch.serialize()).then(async () => {
+    await db.collection("matches").doc(`${runningMatch.id}`).set(runningMatch.serialize()).then(async () => {
       // Stuur de runningMatch naar de gebruiker (mobiele app)
       response.send(runningMatch.serialize());
     });
-  } // Als de existingMatch wel bestaat
-  else {
+  } else { // Als de existingMatch wel bestaat
     // Stuur dan de existingMatch naar de gebruiker
-    response.send(existingMatch)
+    response.send(existingMatch);
   }
 });
 
-async function getDocument(collection: string, id: string | number) {
+async function getDocument<T>(collection: string, id: string | number): Promise<T | undefined> {
   const reference: DocumentReference<DocumentData> = (await db.collection(collection).doc(`${id}`));
-  const snapshot = reference.get()
-  return (await snapshot).data()
+  const snapshot = reference.get();
+  return (await snapshot).data() as T;
 }
 
 const MATCH_DATA = {
@@ -88,11 +84,11 @@ const MATCH_DATA = {
           8451,
           5005,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8000,
-        "perkSubStyle": 8400
-      }
+        "perkSubStyle": 8400,
+      },
     },
     {
       "teamId": 100,
@@ -114,11 +110,11 @@ const MATCH_DATA = {
           8236,
           5008,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8100,
-        "perkSubStyle": 8200
-      }
+        "perkSubStyle": 8200,
+      },
     },
     {
       "teamId": 100,
@@ -140,11 +136,11 @@ const MATCH_DATA = {
           8345,
           5008,
           5008,
-          5003
+          5003,
         ],
         "perkStyle": 8000,
-        "perkSubStyle": 8300
-      }
+        "perkSubStyle": 8300,
+      },
     },
     {
       "teamId": 100,
@@ -166,11 +162,11 @@ const MATCH_DATA = {
           8105,
           5005,
           5003,
-          5002
+          5002,
         ],
         "perkStyle": 8400,
-        "perkSubStyle": 8100
-      }
+        "perkSubStyle": 8100,
+      },
     },
     {
       "teamId": 100,
@@ -192,11 +188,11 @@ const MATCH_DATA = {
           8410,
           5005,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8100,
-        "perkSubStyle": 8300
-      }
+        "perkSubStyle": 8300,
+      },
     },
     {
       "teamId": 200,
@@ -218,11 +214,11 @@ const MATCH_DATA = {
           8234,
           5005,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8000,
-        "perkSubStyle": 8200
-      }
+        "perkSubStyle": 8200,
+      },
     },
     {
       "teamId": 200,
@@ -244,11 +240,11 @@ const MATCH_DATA = {
           8226,
           5008,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8100,
-        "perkSubStyle": 8200
-      }
+        "perkSubStyle": 8200,
+      },
     },
     {
       "teamId": 200,
@@ -270,11 +266,11 @@ const MATCH_DATA = {
           8352,
           5005,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8100,
-        "perkSubStyle": 8300
-      }
+        "perkSubStyle": 8300,
+      },
     },
     {
       "teamId": 200,
@@ -296,11 +292,11 @@ const MATCH_DATA = {
           8014,
           5008,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8100,
-        "perkSubStyle": 8000
-      }
+        "perkSubStyle": 8000,
+      },
     },
     {
       "teamId": 200,
@@ -322,69 +318,69 @@ const MATCH_DATA = {
           8347,
           5008,
           5008,
-          5002
+          5002,
         ],
         "perkStyle": 8100,
-        "perkSubStyle": 8300
-      }
-    }
+        "perkSubStyle": 8300,
+      },
+    },
   ],
   "observers": {
-    "encryptionKey": "pWfojdgc8ma1JIxqcdowXGF58s8qbH9z"
+    "encryptionKey": "pWfojdgc8ma1JIxqcdowXGF58s8qbH9z",
   },
   "platformId": "EUW1",
   "bannedChampions": [
     {
       "championId": 777,
       "teamId": 100,
-      "pickTurn": 1
+      "pickTurn": 1,
     },
     {
       "championId": 555,
       "teamId": 100,
-      "pickTurn": 2
+      "pickTurn": 2,
     },
     {
       "championId": 11,
       "teamId": 100,
-      "pickTurn": 3
+      "pickTurn": 3,
     },
     {
       "championId": 106,
       "teamId": 100,
-      "pickTurn": 4
+      "pickTurn": 4,
     },
     {
       "championId": 360,
       "teamId": 100,
-      "pickTurn": 5
+      "pickTurn": 5,
     },
     {
       "championId": 111,
       "teamId": 200,
-      "pickTurn": 6
+      "pickTurn": 6,
     },
     {
       "championId": 63,
       "teamId": 200,
-      "pickTurn": 7
+      "pickTurn": 7,
     },
     {
       "championId": 238,
       "teamId": 200,
-      "pickTurn": 8
+      "pickTurn": 8,
     },
     {
       "championId": -1,
       "teamId": 200,
-      "pickTurn": 9
+      "pickTurn": 9,
     },
     {
       "championId": 54,
       "teamId": 200,
-      "pickTurn": 10
-    }
+      "pickTurn": 10,
+    },
   ],
   "gameStartTime": 0,
-  "gameLength": 0
-}
+  "gameLength": 0,
+};

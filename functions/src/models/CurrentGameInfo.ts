@@ -1,6 +1,6 @@
-import { BannedChampion } from "./BannedChampion";
-import { Observer } from "./Observer";
-import { CurrentGameParticipant} from "./CurrentGameParticipant";
+import {BannedChampion} from "./BannedChampion";
+import {Observer} from "./Observer";
+import {CurrentGameParticipant} from "./CurrentGameParticipant";
 
 export interface CurrentGameInfo {
   gameId: number;

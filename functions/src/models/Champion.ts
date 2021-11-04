@@ -1,8 +1,8 @@
-import champions from "../static-data/champions.json"
-import { Serializable } from "./Serializable";
+import champions from "../static-data/champions.json";
+import {Serializable} from "./Serializable";
 
 
-export class Champion implements Serializable{
+export class Champion implements Serializable {
   key: string;
   name: string;
   image: string;
@@ -10,7 +10,7 @@ export class Champion implements Serializable{
   constructor(key: string) {
     const rawChampion: RawChampion | undefined = Object.values(champions).find((champion) => {
       return champion.key === key;
-    })
+    });
     if (!rawChampion) {
       throw new Error("Champion not found.");
     }
@@ -18,15 +18,14 @@ export class Champion implements Serializable{
     this.key = rawChampion.key;
     this.name = rawChampion.name;
     this.image = rawChampion.image.sprite;
-
   }
 
-  serialize(){
-    return{
+  serialize(): Record<string, unknown> {
+    return {
       key: this.key,
       name: this.name,
-      image: this.image
-    }
+      image: this.image,
+    };
   }
 }
 

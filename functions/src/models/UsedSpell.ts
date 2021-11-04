@@ -1,5 +1,5 @@
-import { Participant } from "./Participant";
-import { Spell } from "./Spell";
+import {Participant} from "./Participant";
+import {Spell} from "./Spell";
 
 export interface UsedSpell {
   timestamp: number;

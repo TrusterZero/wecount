@@ -1,15 +1,15 @@
-import spells from "../static-data/spells.json"
-import { Serializable } from "./Serializable";
+import spells from "../static-data/spells.json";
+import {Serializable} from "./Serializable";
 
-export class Spell implements Serializable{
+export class Spell implements Serializable {
   id: number;
   cooldown: number;
   image: string;
   constructor(id: number) {
     const rawSpell: RawSpell | undefined = spells.find((spell) => {
       return spell.id === id;
-    })
-    if (!rawSpell){
+    });
+    if (!rawSpell) {
       throw new Error("Spell not found.");
     }
 
@@ -18,12 +18,12 @@ export class Spell implements Serializable{
     this.image = rawSpell.iconPath;
   }
 
-  serialize(){
-    return{
+  serialize(): Record<string, unknown> {
+    return {
       id: this.id,
       cooldown: this.cooldown,
-      image: this.image
-    }
+      image: this.image,
+    };
   }
 }
 
