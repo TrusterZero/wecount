@@ -9,6 +9,9 @@ ion-title, ion-label {
 ion-content {
   text-align: center;
   font-family: Poppins !important;
+  display: flex ;
+  place-items: center;
+  place-content: center;
 }
 
 input {
@@ -18,6 +21,8 @@ input {
 ion-button {
   font-family: Poppins !important;
   font-weight: bold;
+  --border-radius: 100px;
+  --border-width: #FFB300 2px;
 }
 
 

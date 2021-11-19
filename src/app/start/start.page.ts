@@ -33,10 +33,7 @@ export class StartPage implements OnInit {
   // }
 
   goToMatch(){
-
-    this.storage.get("summoner").then((summonerInfo: SummonerInfo) => {
-      console.log(`Searching match with the name: ${summonerInfo.name} on the ${summonerInfo.region} server`)
-    })
+    this.match.searchMatch()
   }
 
   ngOnInit() {
