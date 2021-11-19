@@ -2,7 +2,6 @@ import { Component, Injectable, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
 import { AlertController } from '@ionic/angular';
-import { LoginPage } from '../login/login.page';
 import { StorageService } from '../services/storage.service';
 import { SummonerInfo } from 'functions/src/models/SummonerInfo';
 import { MatchService } from '../services/match.service';
