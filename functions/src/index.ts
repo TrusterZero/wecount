@@ -9,10 +9,10 @@ import {SummonerDTO} from "./models/SummonerDTO";
 import {firestore} from "firebase-admin/lib/firestore";
 import DocumentReference = firestore.DocumentReference;
 import DocumentData = firebase.firestore.DocumentData;
-import * as corsModule from 'cors';
+import corsModule from "cors";
 
 
-const cors = corsModule{origin:'https://us-central1-we-count-4256c.cloudfunctions.net/getMatch'})
+const cors = corsModule({origin: "https://us-central1-we-count-4256c.cloudfunctions.net/getMatch"});
 
 
 admin.initializeApp();
@@ -21,7 +21,6 @@ const db = admin.firestore();
 
 export const getMatch = functions.https.onRequest((request, response) => {
   cors(request, response, async () => {
-
     // Summoner info
     const info: SummonerInfo = request.body as SummonerInfo;
 
@@ -55,7 +54,7 @@ export const getMatch = functions.https.onRequest((request, response) => {
       // Stuur dan de existingMatch naar de gebruiker
       response.send(existingMatch);
     }
-  })
+  });
 });
 
 async function getDocument<T>(collection: string, id: string | number): Promise<T | undefined> {
