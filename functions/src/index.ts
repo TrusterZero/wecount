@@ -24,12 +24,10 @@ export const getMatch = functions.https.onRequest(async (request, response) => {
     const summonerUrl = `https://${info.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(info.name)}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`; // hier wordt een variabele gemaakt met een url waarin de vorige variabele summonerInfo gebruikt wordt met de property name
     console.log(summonerUrl);
     const summonerDTO: SummonerDTO = (await axios.get(summonerUrl)).data; // met axios kan er hier een https opgevraagd en de inhoud gebruikt worden
-    console.log(summonerDTO);
 
     // Use the Id to request the match
     const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`;
     const gameInfo: CurrentGameInfo = (await axios.get(matchUrl)).data;
-    console.log(gameInfo);
 
     // const gameInfo: CurrentGameInfo = MATCH_DATA as unknown as CurrentGameInfo;
 
