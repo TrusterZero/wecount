@@ -1,6 +1,5 @@
 import * as functions from "firebase-functions";
 import admin from "firebase-admin";
-import firebase from "firebase";
 import axios from "axios";
 import {CurrentGameInfo} from "./models/CurrentGameInfo";
 import {Match} from "./models/Match";
@@ -8,29 +7,29 @@ import {SummonerInfo} from "./models/SummonerInfo";
 import {SummonerDTO} from "./models/SummonerDTO";
 import {firestore} from "firebase-admin/lib/firestore";
 import DocumentReference = firestore.DocumentReference;
-import DocumentData = firebase.firestore.DocumentData;
-import corsModule from "cors";
+import DocumentData = firestore.DocumentData;
 
 
-const cors = corsModule({origin: "https://us-central1-we-count-4256c.cloudfunctions.net/getMatch"});
 
 
 admin.initializeApp();
 // Firebase SDK
 const db = admin.firestore();
 
-export const getMatch = functions.https.onRequest((request, response) => {
-  cors(request, response, async () => {
+export const getMatch = functions.https.onRequest(async (request, response) => {
     // Summoner info
     const info: SummonerInfo = request.body as SummonerInfo;
 
     // Request summoner Id first using the summoner's name
-    const summonerUrl = `https://${info.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${info.name}?api_key=RGAPI-5eb77cab-2854-445b-aa6a-f4f235ca21ca`; // hier wordt een variabele gemaakt met een url waarin de vorige variabele summonerInfo gebruikt wordt met de property name
+    const summonerUrl = `https://${info.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(info.name)}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`; // hier wordt een variabele gemaakt met een url waarin de vorige variabele summonerInfo gebruikt wordt met de property name
+    console.log(summonerUrl);
     const summonerDTO: SummonerDTO = (await axios.get(summonerUrl)).data; // met axios kan er hier een https opgevraagd en de inhoud gebruikt worden
+    console.log(summonerDTO);
 
     // Use the Id to request the match
-    const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-5eb77cab-2854-445b-aa6a-f4f235ca21ca`;
+    const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`;
     const gameInfo: CurrentGameInfo = (await axios.get(matchUrl)).data;
+    console.log(gameInfo);
 
     // const gameInfo: CurrentGameInfo = MATCH_DATA as unknown as CurrentGameInfo;
 
@@ -54,7 +53,6 @@ export const getMatch = functions.https.onRequest((request, response) => {
       // Stuur dan de existingMatch naar de gebruiker
       response.send(existingMatch);
     }
-  });
 });
 
 async function getDocument<T>(collection: string, id: string | number): Promise<T | undefined> {

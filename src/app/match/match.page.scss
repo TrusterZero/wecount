@@ -1,0 +1,80 @@
+ion-title {
+  background: rgb(255,255,255);
+  background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 43%, rgba(255,179,0,1) 44%, rgba(255,179,0,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+ion-title, ion-label {
+  margin-top: 16px;
+  text-align: center;
+  font-family: Poppins !important;
+  font-weight: bold;
+  font-size: 5vh;
+}
+
+ion-content {
+  text-align: center;
+  font-family: Poppins !important;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+input {
+  text-align: center;
+}
+
+ion-button {
+  font-family: Poppins !important;
+  font-weight: bold;
+}
+
+.centered {
+  display: flex;
+  place-items: center;
+  place-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: stretch;
+  align-items: stretch;
+  height: 80%;
+}
+
+.select {
+  margin: auto;
+}
+
+.toolbar-content {
+  height: 10vh;
+}
+
+.rainbow-text {
+  margin-top: 16px;
+  text-align: center;
+  font-family: Poppins !important;
+  font-weight: bold;
+  font-size: 5vh;
+}
+.rainbow-text .block-line > span {
+  display: inline-block;
+}
+
+
+ion-icon {
+  height: 7vh;
+}
+
+.flex-header {
+  padding-right: 15px;
+  display: flex;
+  padding-left: 15px;
+  justify-content: space-between;
+}
+
+.info-button {
+  box-shadow: none;
+  background: none;
+}

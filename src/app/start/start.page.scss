@@ -29,3 +29,53 @@ ion-button {
 ion-activated {
   color: #FFB300 !important;
 }
+
+.centered {
+  display: flex;
+  place-items: center;
+  place-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: stretch;
+  height: 80%;
+}
+
+.rainbow-text {
+  margin-top: 16px;
+  text-align: center;
+  font-family: Poppins !important;
+  font-weight: bold;
+  font-size: 5vh;
+}
+
+.rainbow-text .block-line > span {
+  display: inline-block;
+}
+
+ion-icon {
+  height: 7vh;
+}
+
+.flex-header {
+  padding-right: 15px;
+  display: flex;
+  padding-left: 15px;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: center;
+}
+
+.info-button {
+  box-shadow: none;
+  background: none;
+}
+
+.search-button {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  place-content: center;
+}

@@ -17,7 +17,16 @@ const routes: Routes = [
   {
     path: 'match',
     loadChildren: () => import('./match/match.module').then( m => m.MatchPageModule)
+  },
+  {
+    path: 'info',
+    loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
+  },
+  {
+    path: 'info',
+    loadChildren: () => import('./info/info.module').then( m => m.InfoPageModule)
   }
+
 
 
 
