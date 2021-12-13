@@ -1,0 +1,5 @@
+<div class="content" [class]="counting ? 'counting content' : 'content'"  (click)="onClick()">
+  <span *ngIf="counting" (click)="cancelCooldown()">{{currentCooldown}}</span>
+  <span *ngIf="confirm">X</span>
+  <img src="assets/Flash_HD.png" class="image" alt=""/>
+</div>

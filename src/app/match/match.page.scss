@@ -78,3 +78,41 @@ ion-icon {
   box-shadow: none;
   background: none;
 }
+
+ion-grid {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  justify-content: space-around;
+}
+
+ion-row {
+  background-color: dimgrey;
+  height: 15vh;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 10px;
+}
+
+ion-img {
+  display: block;
+  width: 13vh;
+  height: 13vh;
+  object-fit: inherit;
+  object-position: inherit;
+}
+
+.img-summ {
+  display: block;
+  width: 11vh;
+  height: 11vh;
+  object-fit: inherit;
+  object-position: inherit;
+}
+
+.summrow{
+  display: inherit;
+}
+

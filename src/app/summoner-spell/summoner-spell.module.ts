@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { SummonerSpellComponent } from './summoner-spell.component';
 
-import { MatchPageRoutingModule } from './match-routing.module';
-
-import { MatchPage } from './match.page';
-import { IbolToggleModule } from '../ibol-toggle/ibol-toggle.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MatchPageRoutingModule
   ],
-  declarations: [MatchPage]
+  declarations: [SummonerSpellComponent],
+  exports: [SummonerSpellComponent],
 })
-export class MatchPageModule {}
+export class SummonerSpellModule {}

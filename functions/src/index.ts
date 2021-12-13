@@ -17,7 +17,7 @@ admin.initializeApp();
 const db = admin.firestore();
 
 export const getMatch = functions.https.onRequest((request, response) => {
-  return cors(request, response, async () => {
+  cors(request, response, async () => {
     // Summoner info
     const info: SummonerInfo = request.body as SummonerInfo;
 
