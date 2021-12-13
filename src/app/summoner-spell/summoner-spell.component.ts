@@ -1,14 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {interval} from 'rxjs/internal/observable/interval';
-import { takeUntil } from 'rxjs/internal/operators/takeUntil';
-import { Subject } from 'rxjs/internal/Subject';
-import {Subscription} from 'rxjs/internal/Subscription';
+import {Component, Input, OnInit} from "@angular/core";
+import {interval} from "rxjs/internal/observable/interval";
+import {takeUntil} from "rxjs/internal/operators/takeUntil";
+import {Subject} from "rxjs/internal/Subject";
+import {Subscription} from "rxjs/internal/Subscription";
 
 
 @Component({
-  selector: 'app-summoner-spell',
-  templateUrl: './summoner-spell.component.html',
-  styleUrls: ['./summoner-spell.component.scss'],
+  selector: "app-summoner-spell",
+  templateUrl: "./summoner-spell.component.html",
+  styleUrls: ["./summoner-spell.component.scss"],
 })
 export class SummonerSpellComponent {
   @Input() image: string;
@@ -16,24 +16,24 @@ export class SummonerSpellComponent {
   @Input() name: string;
   @Input() cooldown: number | null = 300;
   currentCooldown: number | null;
-  @Input() counting: boolean = false;
+  @Input() counting = false;
   @Input() init: number = null;
   $timer: Subscription;
-  @Input() confirm: boolean = false;
-  @Input() cancel: boolean = false;
+  @Input() confirmed = false;
+  @Input() cancel = false;
   stopCounting$: Subject<null> = new Subject();
+  confirmCheck: boolean;
 
   constructor() {
-    this.currentCooldown = this.cooldown
+    this.currentCooldown = this.cooldown;
   }
 
 
   public startCooldown() {
-    if(this.counting){
-      return
+    if (this.counting) {
+      return;
     }
-    this.reset()
-    this.counting = true
+    this.counting = true;
     this.$timer = interval(1000).pipe(takeUntil(this.stopCounting$)).subscribe(x => {
       this.currentCooldown--;
       if (this.currentCooldown === 0) {
@@ -42,31 +42,40 @@ export class SummonerSpellComponent {
     });
   }
 
-  onClick(){
-    if(!this.counting){
-      this.startCooldown()
+  onClick() {
+    if (!this.counting) {
+      this.startCooldown();
     } else {
-      this.cancelCooldown()
+      this.confirmCancel();
     }
   }
 
   public reset() {
-    this.stopCounting$.next()
+    this.stopCounting$.next();
     this.counting = false;
     this.currentCooldown = this.cooldown;
-
   }
 
-  public cancelCooldown(){
+  public cancelCooldown() {
     //this.confirm = true
-    debugger
-    this.reset()
+    this.reset();
 
-}
-
-  ngOnInit() {
   }
 
+
+  private confirmCancel() {
+    if (this.confirmed) {
+      this.cancelCooldown();
+      this.confirmCheck = false;
+      this.confirmed = false;
+    }
+    if (this.confirmCheck) {
+      this.confirmed = true;
+      this.confirmCheck = false;
+      return;
+    }
+    this.confirmCheck = true;
+  }
 }
 
 

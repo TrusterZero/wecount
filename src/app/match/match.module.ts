@@ -8,13 +8,16 @@ import { MatchPageRoutingModule } from './match-routing.module';
 
 import { MatchPage } from './match.page';
 import { IbolToggleModule } from '../ibol-toggle/ibol-toggle.module';
+import {SummonerSpellModule} from "../summoner-spell/summoner-spell.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MatchPageRoutingModule
+    MatchPageRoutingModule,
+    IbolToggleModule,
+    SummonerSpellModule,
   ],
   declarations: [MatchPage]
 })
