@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
 import { IonicModule } from '@ionic/angular';
+import { IbolToggleComponent } from './ibol-toggle.component';
 
-import { MatchPageRoutingModule } from './match-routing.module';
-
-import { MatchPage } from './match.page';
-import { IbolToggleModule } from '../ibol-toggle/ibol-toggle.module';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MatchPageRoutingModule
   ],
-  declarations: [MatchPage]
+  declarations: [IbolToggleComponent],
+  exports: [IbolToggleComponent],
 })
-export class MatchPageModule {}
+export class IbolToggleModule {}

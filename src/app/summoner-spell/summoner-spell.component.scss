@@ -1,0 +1,32 @@
+$size: 55px;
+
+.content {
+  max-width: $size;
+  max-height: $size;
+}
+
+.image {
+  width: $size;
+  height: $size;
+  border-radius: 5px;
+}
+
+.counting {
+  img {
+    filter: grayscale(100%);
+    position: relative;
+  }
+  span {
+    width: $size;
+    height: $size;
+    font-weight: bolder;
+    color: white;
+    font-size: 28px;
+    text-shadow: 0 0 15px black, 0 0 10px black;
+    position: absolute;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+  }
+}
