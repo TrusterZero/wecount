@@ -17,10 +17,11 @@ export class LoginPage implements OnInit {
   summonerInfo: SummonerInfo = {
     name: '',
     region: Region.EUROPE_WEST
-  }
+  };
 
 
   constructor(public storage: StorageService, public alertController: AlertController, private router: Router) {
+
   }
 
   async summonerAlert() {

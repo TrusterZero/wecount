@@ -45,9 +45,9 @@ export class SummonerSpellComponent {
   onClick() {
     if (!this.counting) {
       this.startCooldown();
-    } else {
-      this.confirmCancel();
+      return;
     }
+      this.confirmCancel();
   }
 
   public reset() {

@@ -8,51 +8,52 @@ import {SummonerDTO} from "./models/SummonerDTO";
 import {firestore} from "firebase-admin/lib/firestore";
 import DocumentReference = firestore.DocumentReference;
 import DocumentData = firestore.DocumentData;
-import corsModule from "cors";
 
-const cors = corsModule({origin: "https://us-central1-we-count-4256c.cloudfunctions.net/getMatch"});
 
 admin.initializeApp();
 // Firebase SDK
 const db = admin.firestore();
 
-export const getMatch = functions.https.onRequest((request, response) => {
-  cors(request, response, async () => {
-    // Summoner info
-    const info: SummonerInfo = request.body as SummonerInfo;
+export const getMatch = functions.https.onCall(async (data) => {
+  functions.logger.log(data);
+  functions.logger.log("---------------");
+  functions.logger.log(data);
+  // Summoner info
+  const info: SummonerInfo = data as SummonerInfo;
 
-    // Request summoner Id first using the summoner's name
-    const summonerUrl = `https://${info.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(info.name)}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`; // hier wordt een variabele gemaakt met een url waarin de vorige variabele summonerInfo gebruikt wordt met de property name
-    console.log(summonerUrl);
-    const summonerDTO: SummonerDTO = (await axios.get(summonerUrl)).data; // met axios kan er hier een https opgevraagd en de inhoud gebruikt worden
+  // Request summoner Id first using the summoner's name
+  const summonerUrl = `https://${info.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(info.name)}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`; // hier wordt een variabele gemaakt met een url waarin de vorige variabele summonerInfo gebruikt wordt met de property name
+  console.log(summonerUrl);
+  const summonerDTO: SummonerDTO = (await axios.get(summonerUrl)).data; // met axios kan er hier een https opgevraagd en de inhoud gebruikt worden
 
-    // Use the Id to request the match
-    const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`;
-    const gameInfo: CurrentGameInfo = (await axios.get(matchUrl)).data;
+  // Use the Id to request the match
+  const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-cf4b475b-321e-4523-9d9b-4a1a6c88f018`;
+  const gameInfo: CurrentGameInfo = (await axios.get(matchUrl)).data;
 
-    // const gameInfo: CurrentGameInfo = MATCH_DATA as unknown as CurrentGameInfo;
+  // const gameInfo: CurrentGameInfo = MATCH_DATA as unknown as CurrentGameInfo;
 
-    const runningMatch: Match = new Match(gameInfo); // De match die wij van riot binnen krijgen
+  const runningMatch: Match = new Match(gameInfo); // De match die wij van riot binnen krijgen
 
 
-    // const existingMatchRef: DocumentReference<DocumentData> = (await db.collection('matches').doc(`${runningMatch.id}`));
-    // const existingMatchSnapshot = existingMatchRef.get()
-    // const existingMatch: Match = (await existingMatchSnapshot).data(); // De match die wij zelf op hebben geslagen (met de al gebruikte spells (usedSpells))
+  // const existingMatchRef: DocumentReference<DocumentData> = (await db.collection('matches').doc(`${runningMatch.id}`));
+  // const existingMatchSnapshot = existingMatchRef.get()
+  // const existingMatch: Match = (await existingMatchSnapshot).data(); // De match die wij zelf op hebben geslagen (met de al gebruikte spells (usedSpells))
 
-    const existingMatch: Match | undefined = (await getDocument<Match>("matches", runningMatch.id)); // de eerdere 3 stappen worden uitgevoerd in deze functie
+  const existingMatch: Match | undefined = (await getDocument<Match>("matches", runningMatch.id)); // de eerdere 3 stappen worden uitgevoerd in deze functie
 
-    // Als we geen existing match hebben
-    if (!existingMatch) {
-      // Plaats dan de runningMatch die we van Riot hebben gekregen in de data base
-      await db.collection("matches").doc(`${runningMatch.id}`).set(runningMatch.serialize()).then(async () => {
-        // Stuur de runningMatch naar de gebruiker (mobiele app)
-        response.send(runningMatch.serialize());
-      });
-    } else { // Als de existingMatch wel bestaat
-      // Stuur dan de existingMatch naar de gebruiker
-      response.send(existingMatch);
-    }
-  });
+  // Als we geen existing match hebben
+  if (!existingMatch) {
+    // Plaats dan de runningMatch die we van Riot hebben gekregen in de data base
+    await db.collection("matches").doc(`${runningMatch.id}`).set(runningMatch.serialize()).then(async () => {
+      // Stuur de runningMatch naar de gebruiker (mobiele app)
+      return runningMatch.serialize();
+    });
+  } else { // Als de existingMatch wel bestaat
+    // Stuur dan de existingMatch naar de gebruiker
+    return existingMatch;
+  }
+
+  return undefined;
 });
 
 async function getDocument<T>(collection: string, id: string | number): Promise<T | undefined> {
