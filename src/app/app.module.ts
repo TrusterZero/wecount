@@ -14,14 +14,14 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 
 const firebaseConfig = {
-  apiKey: "AIzaSyByVgfKpTQuIfr8yhA7s7hAnic7vy67U5A",
-  authDomain: "we-count-4256c.firebaseapp.com",
-  databaseURL: "https://we-count-4256c-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "we-count-4256c",
-  storageBucket: "we-count-4256c.appspot.com",
-  messagingSenderId: "131701347582",
-  appId: "1:131701347582:web:9bf4c93bdb900e82f041af",
-  measurementId: "G-6VG4MHT6FC"
+  apiKey: 'AIzaSyByVgfKpTQuIfr8yhA7s7hAnic7vy67U5A',
+  authDomain: 'we-count-4256c.firebaseapp.com',
+  databaseURL: 'https://we-count-4256c-default-rtdb.europe-west1.firebasedatabase.app',
+  projectId: 'we-count-4256c',
+  storageBucket: 'we-count-4256c.appspot.com',
+  messagingSenderId: '131701347582',
+  appId: '1:131701347582:web:9bf4c93bdb900e82f041af',
+  measurementId: 'G-6VG4MHT6FC'
 };
 
 @NgModule({

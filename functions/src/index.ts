@@ -22,12 +22,12 @@ export const getMatch = functions.https.onCall(async (data) => {
   const info: SummonerInfo = data as SummonerInfo;
 
   // Request summoner Id first using the summoner's name
-  const summonerUrl = `https://${info.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(info.name)}?api_key=RGAPI-48b8d00a-0cc2-4ef0-ab5f-257d47d05df2`; // hier wordt een variabele gemaakt met een url waarin de vorige variabele summonerInfo gebruikt wordt met de property name
+  const summonerUrl = `https://${info.region}.api.riotgames.com/lol/summoner/v4/summoners/by-name/${encodeURI(info.name)}?api_key=RGAPI-ba9fa027-8edc-4bb6-8449-19de98a21aa3`; // hier wordt een variabele gemaakt met een url waarin de vorige variabele summonerInfo gebruikt wordt met de property name
   console.log(summonerUrl);
   const summonerDTO: SummonerDTO = (await axios.get(summonerUrl)).data; // met axios kan er hier een https opgevraagd en de inhoud gebruikt worden
 
   // Use the Id to request the match
-  const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-48b8d00a-0cc2-4ef0-ab5f-257d47d05df2`;
+  const matchUrl = `https://${info.region}.api.riotgames.com/lol/spectator/v4/active-games/by-summoner/${summonerDTO.id}?api_key=RGAPI-ba9fa027-8edc-4bb6-8449-19de98a21aa3`;
   const gameInfo: CurrentGameInfo = (await axios.get(matchUrl)).data;
 
   // const gameInfo: CurrentGameInfo = MATCH_DATA as unknown as CurrentGameInfo;
@@ -44,8 +44,10 @@ export const getMatch = functions.https.onCall(async (data) => {
   // Als we geen existing match hebben
   if (!existingMatch) {
     // Plaats dan de runningMatch die we van Riot hebben gekregen in de data base
-    await db.collection("matches").doc(`${runningMatch.id}`).set(runningMatch.serialize());
-    return runningMatch.serialize();
+    await db.collection("matches").doc(`${runningMatch.id}`).set(runningMatch.serialize()).then(async () => {
+      // Stuur de runningMatch naar de gebruiker (mobiele app)
+      return runningMatch.serialize();
+    });
   } else { // Als de existingMatch wel bestaat
     // Stuur dan de existingMatch naar de gebruiker
     return existingMatch;

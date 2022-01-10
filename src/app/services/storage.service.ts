@@ -10,11 +10,11 @@ import { SummonerInfo } from 'src/models/SummonerInfo';
 export class StorageService {
 
   constructor(private storage: Storage) {
-    this.storage.create()
+    this.storage.create();
   }
 
   add(key: string, summonerInfo: SummonerInfo): Promise<void> {
-    return this.storage.set(key, summonerInfo)
+    return this.storage.set(key, summonerInfo);
   }
 
   get(key: string): Promise<SummonerInfo> {

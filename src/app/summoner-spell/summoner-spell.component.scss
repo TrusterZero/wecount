@@ -1,21 +1,170 @@
-$size: 55px;
+$size: 65px;
 
 .content {
   max-width: $size;
   max-height: $size;
+
+  img {
+    position: relative;
+    transition: all 0.5s ease-in-out 0s;
+    width: $size;
+    height: $size;
+    border-radius: 5px;
+  }
 }
 
-.image {
-  width: $size;
-  height: $size;
-  border-radius: 5px;
+//noinspection CssUnknownTarget
+.barrier {
+  content: url("/assets/spells/Barrier.png");
+  box-shadow: 0px 0px 10px 1px rgba(238,210,93,0.75);
+  animation: barrier-on 7s linear infinite;
+  @keyframes barrier-on {
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(238,210,93,0.75), 0px 0px 10px 4px rgba(211,175,70,0.75);
+    }
+  }
 }
+
+//noinspection CssUnknownTarget
+.cleanse {
+  content: url("/assets/spells/Cleanse.png");
+  box-shadow: 0px 0px 10px 1px rgba(111,246,229,0.75);
+  animation: cleanse-on 7s linear infinite;
+  @keyframes cleanse-on {
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(111,246,229,0.75), 0px 0px 10px 4px rgba(1, 117, 153, 0.75);
+    }
+  }
+}
+
+//noinspection CssUnknownTarget
+.exhaust {
+  content: url("/assets/spells/Exhaust.png");
+  box-shadow: 0px 0px 10px 1px rgba(241,215,130,0.75);
+  animation: exhaust-on 7s linear infinite;
+  @keyframes exhaust-on {
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(241,215,130,0.75), 0px 0px 10px 4px rgba(105, 82, 0, 0.75);
+    }
+  }
+}
+
+//noinspection CssUnknownTarget
+.flash {
+  content: url("/assets/spells/Flash.png");
+  box-shadow: 0px 0px 10px 1px rgba(79,61,28,0.75);
+  animation: flash-on 7s linear infinite;
+  @keyframes flash-on {
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(79,61,28,0.75), 0px 0px 10px 4px rgba(255, 197, 58, 0.75);
+    }
+  }
+}
+
+//noinspection CssUnknownTarget
+.ghost {
+  content: url("/assets/spells/Ghost.png");
+  box-shadow: 0px 0px 10px 1px rgba(207,243,250,0.75);
+  animation: ghost-on 7s linear infinite;
+  @keyframes ghost-on {
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(207,243,250,0.75), 0px 0px 10px 4px rgba(123, 247, 251, 0.75);
+    }
+  }
+}
+
+//noinspection CssUnknownTarget
+.heal {
+  content: url("/assets/spells/Heal.png");
+  box-shadow: 0px 0px 10px 1px rgba(167,245,125,0.75);
+  animation: heal-on 7s linear infinite;
+  @keyframes heal-on {
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(167,245,125,0.75), 0px 0px 10px 4px rgba(94, 234, 71, 0.75);
+    }
+  }
+}
+
+//noinspection CssUnknownTarget
+.hexflash {
+  content: url("/assets/spells/Hexflash.png");
+  box-shadow: 0px 0px 10px 1px rgba(254,235,90,0.75);
+  animation: hexflash-on 7s linear infinite;
+  @keyframes hexflash-on {
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(254,235,90,0.75), 0px 0px 10px 4px rgba(131, 43, 71, 0.75);
+    }
+  }
+}
+
+//noinspection CssUnknownTarget
+.ignite {
+  content: url("/assets/spells/Ignite.png");
+  box-shadow: 0px 0px 10px 1px rgba(254,235,90,0.75);
+  animation: ignite-on 7s linear infinite;
+  @keyframes ignite-on {
+
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(254,235,90,0.75), 0px 0px 10px 5px rgba(132, 7, 1, 0.75);
+    }
+
+  }
+}
+
+//noinspection CssUnknownTarget
+.smite {
+  content: url("/assets/spells/Smite.png");
+  box-shadow: 0px 0 10px 2px rgba(251, 242, 191, 0.75);
+  filter: grayscale(100%);
+  pointer-events: none;
+}
+
+//noinspection CssUnknownTarget
+.teleport {
+  content: url("/assets/spells/Teleport.png");
+  box-shadow: 0px 0px 10px 1px rgba(255, 255, 255, 0.75);
+  animation: teleport-on 7s linear infinite;
+  @keyframes teleport-on {
+
+    50% {
+      box-shadow: 0px 0px 10px 2px rgba(255, 255, 255, 0.75), 0px 0px 10px 4px rgba(126, 0, 186, 0.75);
+
+    }
+  }
+}
+
 
 .counting {
   img {
     filter: grayscale(100%);
-    position: relative;
+    transition: all 0.5s ease-in-out 0s;
+    box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
+    animation: spell-off 4s infinite;
   }
+
+  @keyframes spell-off {
+    0% {
+      box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.75);
+    }
+
+    25% {
+      box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75);
+    }
+
+    29% {
+      box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.75);
+    }
+
+    34% {
+      box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.75);
+    }
+
+    50% {
+      box-shadow: 0px 0 10px 2px rgba(0, 0, 0, 0.75);
+    }
+  }
+
+  //noinspection ALL
   span {
     width: $size;
     height: $size;
@@ -28,5 +177,11 @@ $size: 55px;
     display: flex;
     justify-content: center;
     place-items: center;
+  }
+}
+
+.confirmed {
+  img {
+    filter: grayscale(100%);
   }
 }

@@ -1,24 +1,25 @@
 <ion-header color="primary">
   <ion-toolbar>
     <div class="rainbow-text flex-header" style="text-align: center;">
-      <span class="block-line"><span><span style="color:#FFFFFF;">W</span><span style="color:#FFFFFF;">e</span><span style="color:#FFB300;">C</span><span style="color:#FFB300;">o</span><span style="color:#FFB300;">u</span><span style="color:#ffb300;">n</span><span style="color:#ffb300;">t</span></span></span>
-      <ion-fab-button class="info-button"><ion-icon name="information-circle-outline"></ion-icon></ion-fab-button>
+      <span class="block-line"><span><span style="color:#FFFFFF;">W</span><span style="color:#FFFFFF;">e</span><span
+        style="color:#FFB300;">C</span><span style="color:#FFB300;">o</span><span style="color:#FFB300;">u</span><span
+        style="color:#ffb300;">n</span><span style="color:#ffb300;">t</span></span></span>
+      <ion-fab-button class="info-button">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </ion-fab-button>
     </div>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-align-items-center centered" color="secondary">
-  <ion-grid>
-    <ion-row>
-      <ion-col size="3.5">
-        <ion-img src="src/app/match/ChampionSquare.png"></ion-img>
-      </ion-col>
-      <ion-col size="2">
-        <app-ibol-toggle></app-ibol-toggle>
-      </ion-col>
-      <ion-row class="summrow" size="6">
-        <app-summoner-spell></app-summoner-spell>
-        <app-summoner-spell></app-summoner-spell>
+  <ion-grid *ngIf="match">
+    <ion-row *ngFor="let participant of match.participants; index as i;">
+      <ion-row class="champrow" size="6">
+        <app-summoner-icon></app-summoner-icon>
+        <app-ibol-toggle (active)="toggleIbol(i, $event)"></app-ibol-toggle>
+      </ion-row>
+      <ion-row class="summrow" size="8">
+        <app-summoner-spell *ngFor="let spell of participant.spells; index as index" [spell]="spell" [ibolActive]="ibolActive[i]"></app-summoner-spell>
       </ion-row>
     </ion-row>
   </ion-grid>

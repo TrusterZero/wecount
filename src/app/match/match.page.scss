@@ -83,7 +83,7 @@ ion-grid {
   display: flex;
   flex-direction: column;
   height: 90vh;
-  justify-content: space-around;
+  justify-content: space-evenly;
 }
 
 ion-row {
@@ -92,27 +92,18 @@ ion-row {
   display: flex;
   flex-wrap: nowrap;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 10px;
+  padding: 5px;
 }
 
-ion-img {
-  display: block;
-  width: 13vh;
-  height: 13vh;
-  object-fit: inherit;
-  object-position: inherit;
-}
-
-.img-summ {
-  display: block;
-  width: 11vh;
-  height: 11vh;
-  object-fit: inherit;
-  object-position: inherit;
+.champrow{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .summrow{
   display: inherit;
+  justify-content: space-evenly;
 }
-

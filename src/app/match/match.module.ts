@@ -8,7 +8,8 @@ import { MatchPageRoutingModule } from './match-routing.module';
 
 import { MatchPage } from './match.page';
 import { IbolToggleModule } from '../ibol-toggle/ibol-toggle.module';
-import {SummonerSpellModule} from "../summoner-spell/summoner-spell.module";
+import {SummonerSpellModule} from '../summoner-spell/summoner-spell.module';
+import { SummonerIconModule } from '../summoner-icon/summoner-icon.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {SummonerSpellModule} from "../summoner-spell/summoner-spell.module";
     MatchPageRoutingModule,
     IbolToggleModule,
     SummonerSpellModule,
+    SummonerIconModule,
   ],
   declarations: [MatchPage]
 })

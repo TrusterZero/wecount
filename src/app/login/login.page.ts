@@ -74,18 +74,18 @@ export class LoginPage implements OnInit {
 
     }
     if (!Object.values(Region).includes(this.summonerInfo.region)) {
-      this.regionAlert()
+      this.regionAlert();
       throw new Error('Incorrect region');
       console.log('Error: Incorrect region');
     }
 
     this.storage.add('summoner', this.summonerInfo).then(() => {
-      this.goToStartMatch()
-      this.storage.get("summoner").then((summonerInfo: SummonerInfo) => {
+      this.goToStartMatch();
+      this.storage.get('summoner').then((summonerInfo: SummonerInfo) => {
         console.log(`${summonerInfo.name} logged in succesfully on the ${summonerInfo.region} server`);
-      })
+      });
 
-    })
+    });
 
   }
 

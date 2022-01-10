@@ -1,3 +1,5 @@
+import {EventEmitter, Output } from '@angular/core';
+import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,8 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IbolToggleComponent implements OnInit {
 
+  isActive = false;
+  @Output() active = new EventEmitter();
+
   constructor() { }
 
-  ngOnInit() {}
+  onClick(){
+    this.isActive = !this.isActive;
+    this.active.emit(this.isActive);
+  }
 
+  ngOnInit() {
+
+  }
 }

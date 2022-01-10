@@ -1,5 +1,5 @@
 <div class="content" [class]="counting ? 'counting content' : 'content'"  (click)="onClick()">
-  <span *ngIf="counting">{{currentCooldown}}</span>
+  <span *ngIf="counting && !confirmed">{{currentCooldown}}</span>
   <span *ngIf="confirmed">X</span>
-  <img src="assets/Flash_HD.png" class="image" alt=""/>
+  <img class="heal" alt=""/>
 </div>

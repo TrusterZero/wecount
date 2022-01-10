@@ -2,20 +2,21 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/compat/firestore';
 import { SummonerInfo } from 'functions/src/models/SummonerInfo';
 import { StorageService } from './storage.service';
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import { AngularFireFunctions } from '@angular/fire/compat/functions';
+import {Match} from '../../../functions/src/models/Match';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MatchService {
-  getMatch = this.fns.httpsCallable('getMatch')
+  private getMatch = this.fns.httpsCallable('getMatch');
 
   constructor(private db: AngularFirestore, private storage: StorageService, private fns: AngularFireFunctions) {
   }
-    async searchMatch() {
+    async searchMatch(): Promise<Match> {
       // const matches: AngularFirestoreCollection<any> = this.db.collection('matches');
-      const summonerInfo: SummonerInfo = await this.storage.get("summoner");
+      const summonerInfo: SummonerInfo = await this.storage.get('summoner');
       // const snapshot = await matches.ref.where('participants', 'array-contains', `${summonerInfo.name}`).get();
       // if (snapshot.empty) {
       //   console.log('No matching documents.');
@@ -23,8 +24,7 @@ export class MatchService {
       // }
       // matches.subscribe(console.log);
 
-      this.getMatch(summonerInfo)
-      console.log(await this.getMatch(summonerInfo).toPromise())
+      return await this.getMatch(summonerInfo).toPromise();
     }
 }
 

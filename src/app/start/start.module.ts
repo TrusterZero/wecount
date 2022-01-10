@@ -4,7 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {StartPageRoutingModule} from './start-routing.module';
 import {StartPage} from './start.page';
-import {AngularFireModule} from '@angular/fire/compat/'
+import {AngularFireModule} from '@angular/fire/compat/';
 import { HttpClientModule } from '@angular/common/http';
 
 

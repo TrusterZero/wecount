@@ -16,7 +16,7 @@ import { MatchService } from '../services/match.service';
 export class StartPage implements OnInit {
 
   myInput = '';
-  constructor(private functions: AngularFireFunctions, private alertController: AlertController, private storage: StorageService, private match: MatchService) {}
+  constructor(private functions: AngularFireFunctions, private alertController: AlertController, private storage: StorageService, private route: Router) {}
 
   // callCloudFunction() {
   //   const callable = this.functions.httpsCallable('getMatch');
@@ -32,7 +32,7 @@ export class StartPage implements OnInit {
   // }
 
   goToMatch(){
-    this.match.searchMatch()
+    this.route.navigate(['/match']);
   }
 
   ngOnInit() {
